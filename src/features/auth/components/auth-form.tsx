@@ -16,9 +16,6 @@ import {
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 import Link from "next/link";
-import { useUserStore, User } from "@/lib/store/user-store";
-import { useCookies } from "react-cookie";
-import { authenticateUser } from "@/lib/auth-actions";
 
 export function AuthForm() {
   const router = useRouter();
@@ -28,12 +25,9 @@ export function AuthForm() {
     password: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const setUser = useUserStore((state) => state.setUser);
-  const [, setCookie] = useCookies(["user-token"]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    // 입력 필드가 변경되면 해당 필드의 오류 메시지 제거
     if (errors[e.target.name]) {
       setErrors({ ...errors, [e.target.name]: "" });
     }
@@ -68,33 +62,16 @@ export function AuthForm() {
     setIsLoading(true);
 
     try {
-      // 서버 액션으로 사용자 인증
-      const authResult = await authenticateUser({
-        email: formData.email,
-        password: formData.password,
-      });
-
-      if (!authResult.success || !authResult.user) {
-        toast.error(authResult.error || "로그인에 실패했습니다.");
-        return;
-      }
-
-      // 사용자 정보 저장
-      setUser(authResult.user as User);
-
-      // 토큰을 쿠키에 저장
-      setCookie("user-token", authResult.token, {
-        path: "/",
-        maxAge: 30 * 24 * 60 * 60, // 30일
-        sameSite: "lax",
-      });
-
-      // NextAuth 세션 생성
-      await signIn("credentials", {
+      const result = await signIn("credentials", {
         email: formData.email,
         password: formData.password,
         redirect: false,
       });
+
+      if (result?.error) {
+        toast.error(result.error);
+        return;
+      }
 
       router.push("/dashboard");
       toast.success("로그인되었습니다.");
@@ -113,7 +90,7 @@ export function AuthForm() {
         <CardDescription>계정에 로그인하세요</CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
-        <CardContent>
+        <CardContent className="mb-4">
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email">이메일</Label>

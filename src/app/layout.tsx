@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
-import { Providers } from "@/components/providers";
+import { SocialProviders } from "@/components/providers/SocialProviders";
 
 const manrope = Manrope({ subsets: ["latin"] });
 
@@ -19,10 +19,10 @@ export default function RootLayout({
   return (
     <html lang="ko" className={manrope.className}>
       <body className="min-h-[100dvh]">
-        <Providers>
+        <SocialProviders>
           <Header />
           {children}
-        </Providers>
+        </SocialProviders>
       </body>
     </html>
   );

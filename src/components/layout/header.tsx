@@ -7,11 +7,12 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { UserProfile } from "../../features/auth/components/user-profile";
 
 export function Header() {
   return (
     <header className="border-b">
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-4 flex justify-between">
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
@@ -88,6 +89,7 @@ export function Header() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
+        <UserProfile />
       </div>
     </header>
   );
