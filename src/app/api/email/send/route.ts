@@ -1,20 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import WelcomeEmail from "@/emails/WelcomeEmail";
-import { render } from "@react-email/render";
 
+// 환경변수에서 키 읽기
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
-  const { email, userName } = await req.json();
-
   try {
-    const html = await render(WelcomeEmail({ userName }));
+    const { email, subject, html } = await req.json();
 
     const data = await resend.emails.send({
-      from: "noreply@yourdomain.com",
+      from: "onboarding@resend.dev", // Resend에 등록된 도메인
       to: email,
-      subject: "회원가입을 환영합니다!",
+      subject,
       html,
     });
 

@@ -1,0 +1,42 @@
+{
+  "welcome": "Welcome",
+  "login": "Login",
+  "logout": "Logout",
+  "payment_success": "Payment completed.",
+  "home": {
+    "title": "SaaS Starter Kit",
+    "description": "A modern SaaS starter kit for your next project",
+    "getStarted": "Get Started",
+    "viewDocs": "View Docs"
+  },
+  "header": {
+    "features": "Features",
+    "docs": "Docs",
+    "examples": "Examples",
+    "docsDescription": "Check out our detailed guides and documentation.",
+    "examplesDescription": "Explore various usage examples."
+  },
+  "payment": {
+    "checkout": "Checkout",
+    "title": "Payment Information",
+    "method": "Payment Method",
+    "amount": "Amount",
+    "proceed": "Proceed to Payment",
+    "methods": {
+      "card": "Credit Card",
+      "virtual": "Virtual Account",
+      "transfer": "Bank Transfer",
+      "phone": "Mobile Payment"
+    }
+  },
+  "email": {
+    "test": "Test Email",
+    "title": "Send Test Email",
+    "address": "Email Address",
+    "sending": "Sending...",
+    "send": "Send Email",
+    "success": "Email sent successfully!",
+    "error": "Failed to send email.",
+    "errorDetail": "An error occurred while sending the email."
+  }
+}

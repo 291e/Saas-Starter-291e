@@ -4,19 +4,35 @@ import { useState } from "react";
 import { loadTossPayments } from "@tosspayments/payment-sdk";
 import { PaymentMethod } from "@/types/payment";
 import { useAuth } from "@/features/auth/hooks/useAuth";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { useParams } from "next/navigation";
+import { getDictionary } from "@/lib/i18n";
+import { Locale } from "@/lib/i18n/config";
 
-export default function PaymentCheckout() {
+export function CheckoutButton() {
+  const params = useParams();
+  const locale = params.locale as Locale;
+  const dict = getDictionary(locale);
+
   const paymentMethods: PaymentMethod[] = [
-    { method: "카드", label: "신용카드" },
-    { method: "가상계좌", label: "가상계좌" },
-    { method: "계좌이체", label: "실시간 계좌이체" },
-    { method: "휴대폰", label: "휴대폰 결제" },
+    { method: "카드", label: dict.payment.methods.card },
+    { method: "가상계좌", label: dict.payment.methods.virtual },
+    { method: "계좌이체", label: dict.payment.methods.transfer },
+    { method: "휴대폰", label: dict.payment.methods.phone },
   ];
 
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(
     paymentMethods[0]
   );
   const [amount, setAmount] = useState<string>("1000");
+  const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
 
   const handlePayment = async () => {
@@ -54,24 +70,29 @@ export default function PaymentCheckout() {
         successUrl: `${window.location.origin}/success`,
         failUrl: `${window.location.origin}/fail`,
       });
+      setIsOpen(false);
     } catch (error) {
       console.error("결제 요청 실패:", error);
     }
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 flex items-center justify-center py-12 px-4">
-      <div className="max-w-xl w-full mx-auto">
-        <div className="bg-white rounded-xl shadow-lg p-12 flex flex-col items-center text-center">
-          <div className="mb-6 w-full">
-            <label className="block text-base font-semibold text-grey-700 mb-3 text-left">
-              결제 수단
-            </label>
-            <div className="flex flex-wrap gap-3 justify-center">
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <Button>{dict.payment.checkout}</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>{dict.payment.title}</DialogTitle>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="space-y-2">
+            <label className="text-sm font-medium">{dict.payment.method}</label>
+            <div className="flex flex-wrap gap-2">
               {paymentMethods.map((method) => (
                 <button
                   key={method.method}
-                  className={`px-6 py-3 rounded-lg border font-semibold text-base transition-colors duration-150 w-36
+                  className={`px-4 py-2 rounded-md border text-sm transition-colors
                     ${
                       paymentMethod?.method === method.method
                         ? "bg-blue-100 border-blue-500 text-blue-700"
@@ -87,28 +108,26 @@ export default function PaymentCheckout() {
             </div>
           </div>
 
-          <div className="mb-6 w-full">
-            <label className="block text-base font-semibold text-grey-700 mb-3 text-left">
-              결제 금액
-            </label>
+          <div className="space-y-2">
+            <label className="text-sm font-medium">{dict.payment.amount}</label>
             <input
               type="number"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-base"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               min="1000"
             />
           </div>
 
-          <button
-            className="w-full bg-blue-500 text-white py-3 rounded-lg font-bold text-lg mt-4 hover:bg-blue-600 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+          <Button
+            className="w-full"
             onClick={handlePayment}
             disabled={!paymentMethod}
           >
-            결제하기
-          </button>
+            {dict.payment.proceed}
+          </Button>
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }
