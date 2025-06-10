@@ -11,10 +11,53 @@
   },
   "header": {
     "features": "Features",
+    "pricing": "Pricing",
+    "testimonials": "Testimonials",
+    "blog": "Blog",
+    "faq": "FAQ",
     "docs": "Docs",
     "examples": "Examples",
     "docsDescription": "Check out our detailed guides and documentation.",
-    "examplesDescription": "Explore various usage examples."
+    "examplesDescription": "Explore various usage examples.",
+    "themeToggle": "Toggle theme",
+    "mobileMenu": "Mobile menu"
+  },
+  "footer": {
+    "brand": "SaaS Start Kit",
+    "description": "The future of SaaS development.\nTurn your ideas into reality and start your new business.",
+    "email": "hello@saasstarterkit.dev",
+    "phone": "1588-0000",
+    "address": "123 Development St, Gangnam-gu, Seoul",
+    "categories": {
+      "product": "Product",
+      "company": "Company",
+      "support": "Support",
+      "legal": "Legal"
+    },
+    "links": {
+      "features": "Features",
+      "pricing": "Pricing",
+      "apiDocs": "API Docs",
+      "download": "Download",
+      "about": "About",
+      "careers": "Careers",
+      "press": "Press",
+      "partnerships": "Partnerships",
+      "support": "Developer Support",
+      "docs": "Documentation",
+      "faq": "FAQ",
+      "community": "Community",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookie Policy",
+      "license": "License"
+    },
+    "copyright": "All rights reserved.",
+    "socialLinks": {
+      "twitter": "Twitter",
+      "instagram": "Instagram",
+      "youtube": "YouTube"
+    }
   },
   "payment": {
     "checkout": "Checkout",

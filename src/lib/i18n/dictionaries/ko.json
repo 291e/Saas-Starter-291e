@@ -11,10 +11,53 @@
   },
   "header": {
     "features": "기능",
+    "pricing": "요금제",
+    "testimonials": "후기",
+    "blog": "블로그",
+    "faq": "FAQ",
     "docs": "문서",
     "examples": "예제",
     "docsDescription": "자세한 사용 방법과 가이드를 확인하세요.",
-    "examplesDescription": "다양한 사용 예제를 확인하세요."
+    "examplesDescription": "다양한 사용 예제를 확인하세요.",
+    "themeToggle": "테마 변경",
+    "mobileMenu": "모바일 메뉴"
+  },
+  "footer": {
+    "brand": "SaaS Start Kit",
+    "description": "빠르게 구축하는 SaaS의 미래.\n당신의 아이디어를 현실로 만들고, 새로운 비즈니스를 시작하세요.",
+    "email": "hello@saasstarterkit.dev",
+    "phone": "1588-0000",
+    "address": "서울시 강남구 개발로 123",
+    "categories": {
+      "product": "제품",
+      "company": "회사",
+      "support": "지원",
+      "legal": "법적 고지"
+    },
+    "links": {
+      "features": "기능",
+      "pricing": "요금제",
+      "apiDocs": "API 문서",
+      "download": "다운로드",
+      "about": "회사 소개",
+      "careers": "채용",
+      "press": "보도자료",
+      "partnerships": "파트너십",
+      "support": "개발자 지원",
+      "docs": "문서",
+      "faq": "FAQ",
+      "community": "커뮤니티",
+      "privacy": "개인정보처리방침",
+      "terms": "이용약관",
+      "cookies": "쿠키 정책",
+      "license": "라이선스"
+    },
+    "copyright": "All rights reserved.",
+    "socialLinks": {
+      "twitter": "Twitter",
+      "instagram": "Instagram",
+      "youtube": "YouTube"
+    }
   },
   "payment": {
     "checkout": "결제하기",

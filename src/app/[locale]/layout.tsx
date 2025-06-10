@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "../globals.css";
-import { Header } from "@/components/layout/header";
 import { SocialProviders } from "@/components/providers/SocialProviders";
 import { locales, defaultLocale, Locale } from "@/lib/i18n/config";
+import { HeaderSection } from "@/components/layout/HeaderSection";
+import { FooterSection } from "@/components/layout/FooterSection";
 
 const manrope = Manrope({ subsets: ["latin"] });
 
@@ -28,8 +29,9 @@ export default async function RootLayout({
     <html lang={validLocale} className={manrope.className}>
       <body className="min-h-[100dvh]">
         <SocialProviders>
-          <Header locale={validLocale} />
+          <HeaderSection locale={validLocale} />
           {children}
+          <FooterSection locale={validLocale} />
         </SocialProviders>
       </body>
     </html>

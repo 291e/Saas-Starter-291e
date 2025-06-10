@@ -1,31 +1,26 @@
-import { Button } from "@/components/ui/button";
-import { getDictionary } from "@/lib/i18n";
-import { Locale } from "@/lib/i18n/config";
-import Link from "next/link";
-import { CheckoutButton } from "@/components/payment/checkout-button";
-import { SendEmailForm } from "@/components/email/send-email-form";
+import { HeroSection } from "@/components/main/HeroSection";
+import { LogosSection } from "@/components/main/LogosSection";
+import { ProblemSection } from "@/components/main/ProblemSection";
+import { SolutionSection } from "@/components/main/SolutionSection";
+import { HowItWorksSection } from "@/components/main/HowItWorksSection";
 
-export default async function Home({ params }: { params: { locale: Locale } }) {
-  const { locale } = await params;
-  const dict = getDictionary(locale);
+import { FeaturesSection } from "@/components/main/FeaturesSection";
+import { PricingSection } from "@/components/main/PricingSection";
+import { FAQSection } from "@/components/main/FAQSection";
+import { CTASection } from "@/components/main/CTASection";
 
+export default async function Home() {
   return (
-    <div className="flex h-full flex-col items-center justify-center p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm">
-        <h1 className="text-4xl font-bold text-center mb-8">
-          {dict.home.title}
-        </h1>
-        <p className="text-center mb-8">{dict.home.description}</p>
-        <div className="flex justify-center gap-4">
-          <CheckoutButton />
-
-          <Link href="/docs">
-            <Button variant="outline">{dict.home.viewDocs}</Button>
-          </Link>
-
-          <SendEmailForm />
-        </div>
-      </div>
-    </div>
+    <main className="bg-background text-foreground min-h-screen flex flex-col">
+      <HeroSection />
+      <LogosSection />
+      <ProblemSection />
+      <SolutionSection />
+      <HowItWorksSection />
+      <FeaturesSection />
+      <PricingSection />
+      <FAQSection />
+      <CTASection />
+    </main>
   );
 }
