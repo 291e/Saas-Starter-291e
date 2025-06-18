@@ -2,82 +2,30 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, Sparkles, Zap, Crown, Star, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Star, Zap, Crown, CheckCircle, ArrowRight } from "lucide-react";
+import { PRICING_PLANS } from "@/lib/constants";
 
 export const PricingSection = React.memo(function PricingSection() {
-  const plans = [
-    {
-      name: "스타터",
-      description: "개인 개발자를 위한 무료 플랜",
-      price: "무료",
-      period: "",
-      highlight: false,
-      icon: Star,
-      features: [
-        "기본 UI 컴포넌트",
-        "사용자 인증 (이메일/비밀번호)",
-        "데이터베이스 설정",
-        "기본 이메일 템플릿",
-        "커뮤니티 지원",
-      ],
-      buttonText: "무료로 시작",
-      gradient: "from-gray-500 to-slate-500",
-    },
-    {
-      name: "프로",
-      description: "성장하는 스타트업을 위한 완전한 솔루션",
-      price: "49,000",
-      period: "/월",
-      highlight: true,
-      icon: Zap,
-      badge: "인기",
-      features: [
-        "모든 스타터 기능 포함",
-        "소셜 로그인 (Google, GitHub 등)",
-        "결제 시스템 (Stripe 통합)",
-        "고급 이메일 자동화",
-        "관리자 대시보드",
-        "프리미엄 컴포넌트",
-        "우선 기술 지원",
-      ],
-      buttonText: "프로 플랜 시작",
-      gradient: "from-blue-500 to-indigo-500",
-    },
-    {
-      name: "엔터프라이즈",
-      description: "대규모 팀과 기업을 위한 맞춤형 솔루션",
-      price: "상담",
-      period: "",
-      highlight: false,
-      icon: Crown,
-      features: [
-        "모든 프로 기능 포함",
-        "화이트라벨 솔루션",
-        "맞춤형 개발 지원",
-        "전용 서버 지원",
-        "24/7 전담 지원",
-        "온사이트 교육",
-        "SLA 보장",
-      ],
-      buttonText: "영업팀 문의",
-      gradient: "from-purple-500 to-pink-500",
-    },
-  ];
+  const plans = PRICING_PLANS;
+
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case "Star":
+        return <Star className="w-6 h-6 text-white" />;
+      case "Zap":
+        return <Zap className="w-6 h-6 text-white" />;
+      case "Crown":
+        return <Crown className="w-6 h-6 text-white" />;
+      default:
+        return <Star className="w-6 h-6 text-white" />;
+    }
+  };
 
   return (
-    <section
-      className="py-24 bg-gradient-to-b from-muted/20 to-background"
-      id="pricing"
-    >
+    <section className="py-24 bg-gradient-to-b from-background to-muted/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -87,38 +35,44 @@ export const PricingSection = React.memo(function PricingSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <Badge variant="secondary" className="mb-4 px-4 py-2">
-            <Sparkles className="w-4 h-4 mr-2" />
+          <Badge
+            variant="secondary"
+            className="mb-4 px-4 py-2 bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400"
+          >
+            <Zap className="w-4 h-4 mr-2" />
             요금제
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
-            프로젝트 규모에 맞는
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="text-blue-500">합리적인 가격</span>으로
             <br />
-            완벽한 플랜을 선택하세요
+            시작하세요
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            무료 체험부터 엔터프라이즈까지, SaaS Start Kit으로 당신의 개발
-            여정을 가속화하세요.
+            프로젝트 규모에 맞는 요금제를 선택하세요. 모든 플랜은 14일 무료
+            체험을 제공합니다.
           </p>
         </motion.div>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {/* Pricing Grid */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto"
+        >
           {plans.map((plan, index) => (
             <motion.div
               key={plan.name}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className={`relative ${plan.highlight ? "md:-mt-4 md:mb-4" : ""}`}
+              whileHover={{ y: -4, scale: 1.02 }}
             >
               <Card
-                className={`h-full border-2 transition-all duration-300 group relative overflow-hidden ${
-                  plan.highlight
-                    ? "border-primary shadow-2xl shadow-primary/20 bg-card"
-                    : "border-border hover:border-primary/50 bg-card/50"
+                className={`h-full border-0 bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-300 group relative overflow-hidden ${
+                  plan.highlight ? "ring-2 ring-primary" : ""
                 }`}
               >
                 {/* Background Gradient */}
@@ -126,55 +80,63 @@ export const PricingSection = React.memo(function PricingSection() {
                   className={`absolute inset-0 bg-gradient-to-br ${plan.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}
                 />
 
-                {/* Popular Badge */}
-                {plan.badge && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-primary text-primary px-4 py-1 font-bold">
-                      {plan.badge}
-                    </Badge>
-                  </div>
-                )}
-
-                <CardHeader className="text-center relative">
-                  <div
-                    className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${plan.gradient} p-4 group-hover:scale-110 transition-transform duration-300`}
-                  >
-                    <plan.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle className="text-2xl font-bold mb-2">
-                    {plan.name}
-                  </CardTitle>
-                  <CardDescription className="text-base mb-4">
-                    {plan.description}
-                  </CardDescription>
-                  <div className="mb-6">
-                    <span className="text-4xl font-bold">
-                      {plan.price === "상담" ? plan.price : `₩${plan.price}`}
-                    </span>
-                    {plan.period && (
-                      <span className="text-muted-foreground text-lg">
-                        {plan.period}
-                      </span>
+                <CardContent className="p-6 relative h-full flex flex-col justify-between">
+                  <div>
+                    {/* Badge */}
+                    {plan.badge && (
+                      <Badge
+                        variant="secondary"
+                        className="absolute -top-3 right-6 bg-primary text-primary-foreground"
+                      >
+                        {plan.badge}
+                      </Badge>
                     )}
+
+                    {/* Icon */}
+                    <div
+                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${plan.gradient} p-3 mb-4 group-hover:scale-110 transition-transform duration-300`}
+                    >
+                      {getIcon(plan.icon)}
+                    </div>
+
+                    {/* Plan Name & Description */}
+                    <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                    <p className="text-muted-foreground mb-6">
+                      {plan.description}
+                    </p>
+
+                    {/* Price */}
+                    <div className="mb-6">
+                      <span className="text-4xl font-bold">
+                        {plan.price}
+                        {plan.period && (
+                          <span className="text-lg text-muted-foreground">
+                            {plan.period}
+                          </span>
+                        )}
+                      </span>
+                    </div>
+
+                    {/* Features */}
+                    <ul className="space-y-3 mb-8">
+                      {plan.features.map((feature, featureIndex) => (
+                        <li
+                          key={featureIndex}
+                          className="flex items-center text-sm"
+                        >
+                          <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </CardHeader>
-
-                <CardContent className="relative">
-                  <ul className="space-y-4 mb-8">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start gap-3">
-                        <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
+                  {/* CTA Button */}
                   <Button
-                    className={`w-full ${
+                    className={`w-full group/btn ${
                       plan.highlight
-                        ? "bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/25"
-                        : "bg-secondary hover:bg-secondary/80"
-                    } transition-all duration-300 group/btn`}
+                        ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                        : "bg-secondary hover:bg-secondary/80 text-secondary-foreground border"
+                    }`}
                     size="lg"
                   >
                     {plan.buttonText}
@@ -182,16 +144,16 @@ export const PricingSection = React.memo(function PricingSection() {
                   </Button>
                 </CardContent>
 
-                {/* Glow Effect */}
-                {plan.highlight && (
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary/10 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
-                )}
+                {/* Bottom Accent */}
+                <div
+                  className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${plan.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                />
               </Card>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Bottom Note */}
+        {/* Bottom CTA */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -199,15 +161,12 @@ export const PricingSection = React.memo(function PricingSection() {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <p className="text-muted-foreground">
-            모든 플랜은 14일 무료 체험이 포함되어 있습니다.
-            <br />
-            궁금한 점이 있으시면{" "}
-            <span className="text-primary hover:underline cursor-pointer">
-              개발자 지원팀
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-full">
+            <CheckCircle className="w-4 h-4 text-blue-500" />
+            <span className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+              14일 무료 체험, 신용카드 불필요
             </span>
-            에 문의해주세요.
-          </p>
+          </div>
         </motion.div>
       </div>
     </section>

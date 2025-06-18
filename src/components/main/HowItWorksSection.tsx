@@ -15,56 +15,27 @@ import {
   Globe,
   Play,
 } from "lucide-react";
+import { HOW_IT_WORKS_STEPS } from "@/lib/constants";
 
 export const HowItWorksSection = React.memo(function HowItWorksSection() {
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const steps = [
-    {
-      id: 1,
-      icon: Download,
-      title: "다운로드 & 설치",
-      description: "GitHub에서 프로젝트를 클론하고 의존성을 설치합니다.",
-      details: [
-        "git clone 명령어로 저장소 복제",
-        "npm install 또는 yarn install 실행",
-        "환경 변수 설정 (.env 파일)",
-        "데이터베이스 연결 확인",
-      ],
-      gradient: "from-blue-500 to-cyan-500",
-      bgColor: "bg-blue-50 dark:bg-blue-950/20",
-    },
-    {
-      id: 2,
-      icon: Settings,
-      title: "커스터마이징",
-      description: "브랜딩, 기능, 설정을 프로젝트에 맞게 수정합니다.",
-      details: [
-        "로고 및 브랜딩 변경",
-        "필요한 기능 활성화/비활성화",
-        "결제 설정 (Stripe 키 등)",
-        "이메일 템플릿 커스터마이징",
-      ],
-      gradient: "from-purple-500 to-pink-500",
-      bgColor: "bg-purple-50 dark:bg-purple-950/20",
-    },
-    {
-      id: 3,
-      icon: Rocket,
-      title: "배포 & 런칭",
-      description: "프로덕션 환경에 배포하고 SaaS를 런칭합니다.",
-      details: [
-        "Vercel 또는 다른 플랫폼에 배포",
-        "도메인 연결 및 SSL 설정",
-        "데이터베이스 마이그레이션",
-        "모니터링 및 분석 설정",
-      ],
-      gradient: "from-green-500 to-emerald-500",
-      bgColor: "bg-green-50 dark:bg-green-950/20",
-    },
-  ];
+  const steps = HOW_IT_WORKS_STEPS;
+
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case "Download":
+        return <Download className="w-6 h-6 text-white" />;
+      case "Settings":
+        return <Settings className="w-6 h-6 text-white" />;
+      case "Rocket":
+        return <Rocket className="w-6 h-6 text-white" />;
+      default:
+        return <Download className="w-6 h-6 text-white" />;
+    }
+  };
 
   // 자동 진행 로직
   useEffect(() => {
@@ -145,7 +116,7 @@ export const HowItWorksSection = React.memo(function HowItWorksSection() {
                 onClick={() => goToStep(index)}
                 className={`cursor-pointer p-4 rounded-xl transition-all duration-300 ${
                   index === currentStep
-                    ? `${currentStepData.bgColor} border-2 border-primary/20`
+                    ? `${currentStepData.gradient} border-2 border-primary/20`
                     : "hover:bg-muted/50 border-2 border-transparent"
                 }`}
                 whileHover={{ scale: 1.02 }}
@@ -165,7 +136,7 @@ export const HowItWorksSection = React.memo(function HowItWorksSection() {
                     {index < currentStep ? (
                       <CheckCircle className="w-6 h-6" />
                     ) : index === currentStep ? (
-                      <step.icon className="w-6 h-6" />
+                      getIcon(step.icon)
                     ) : (
                       <span className="font-bold">{step.id}</span>
                     )}
@@ -228,7 +199,7 @@ export const HowItWorksSection = React.memo(function HowItWorksSection() {
                       <div
                         className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${currentStepData.gradient} p-4 shadow-lg`}
                       >
-                        <currentStepData.icon className="w-8 h-8 text-white" />
+                        {getIcon(currentStepData.icon)}
                       </div>
                       <Badge
                         variant="secondary"

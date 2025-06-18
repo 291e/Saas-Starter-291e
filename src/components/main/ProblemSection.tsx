@@ -12,52 +12,29 @@ import {
   Zap,
   Users,
 } from "lucide-react";
+import { PROBLEMS } from "@/lib/constants";
 
 export const ProblemSection = React.memo(function ProblemSection() {
-  const problems = [
-    {
-      icon: Clock,
-      title: "개발 시간 부족",
-      description:
-        "기본 기능 구현에만 몇 달이 걸려 핵심 비즈니스 로직에 집중할 시간이 없어요.",
-      gradient: "from-red-500 to-orange-500",
-    },
-    {
-      icon: Code2,
-      title: "복잡한 설정",
-      description:
-        "인증, 결제, 이메일 등 매번 반복되는 설정들을 처음부터 구현해야 해요.",
-      gradient: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: DollarSign,
-      title: "높은 초기 비용",
-      description:
-        "프로젝트 시작 전에 이미 많은 개발 비용과 시간이 투자되어야 해요.",
-      gradient: "from-green-500 to-emerald-500",
-    },
-    {
-      icon: AlertTriangle,
-      title: "보안 걱정",
-      description:
-        "사용자 데이터 보안과 인증 시스템을 안전하게 구현하기가 어려워요.",
-      gradient: "from-yellow-500 to-amber-500",
-    },
-    {
-      icon: Zap,
-      title: "확장성 문제",
-      description:
-        "처음엔 간단했던 코드가 사용자가 늘어나면서 관리하기 어려워져요.",
-      gradient: "from-purple-500 to-pink-500",
-    },
-    {
-      icon: Users,
-      title: "팀 협업 어려움",
-      description:
-        "프로젝트 구조가 명확하지 않아 팀원들과 효율적으로 작업하기 힘들어요.",
-      gradient: "from-indigo-500 to-blue-500",
-    },
-  ];
+  const problems = PROBLEMS;
+
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case "Clock":
+        return <Clock className="w-6 h-6 text-white" />;
+      case "Code2":
+        return <Code2 className="w-6 h-6 text-white" />;
+      case "DollarSign":
+        return <DollarSign className="w-6 h-6 text-white" />;
+      case "AlertTriangle":
+        return <AlertTriangle className="w-6 h-6 text-white" />;
+      case "Zap":
+        return <Zap className="w-6 h-6 text-white" />;
+      case "Users":
+        return <Users className="w-6 h-6 text-white" />;
+      default:
+        return <Clock className="w-6 h-6 text-white" />;
+    }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -134,7 +111,7 @@ export const ProblemSection = React.memo(function ProblemSection() {
                   <div
                     className={`w-12 h-12 rounded-xl bg-gradient-to-br ${problem.gradient} p-3 mb-4 group-hover:scale-110 transition-transform duration-300`}
                   >
-                    <problem.icon className="w-6 h-6 text-white" />
+                    {getIcon(problem.icon)}
                   </div>
 
                   <h3 className="text-lg font-bold mb-3 group-hover:text-primary transition-colors duration-300">

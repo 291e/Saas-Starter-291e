@@ -12,40 +12,32 @@ import {
   Phone,
   MapPin,
 } from "lucide-react";
-import { Locale } from "@/lib/i18n/config";
-import { getDictionary } from "@/lib/i18n";
 
-export const FooterSection = React.memo(function FooterSection({
-  locale,
-}: {
-  locale: Locale;
-}) {
-  const dict = getDictionary(locale);
-
+export const FooterSection = React.memo(function FooterSection() {
   const footerLinks = {
     product: [
-      { label: dict.footer.links.features, href: "#features" },
-      { label: dict.footer.links.pricing, href: "#pricing" },
-      { label: dict.footer.links.apiDocs, href: "/api-docs" },
-      { label: dict.footer.links.download, href: "/download" },
+      { label: "기능", href: "#features" },
+      { label: "요금제", href: "#pricing" },
+      { label: "API 문서", href: "/api-docs" },
+      { label: "다운로드", href: "/download" },
     ],
     company: [
-      { label: dict.footer.links.about, href: "/about" },
-      { label: dict.footer.links.careers, href: "/careers" },
-      { label: dict.footer.links.press, href: "/press" },
-      { label: dict.footer.links.partnerships, href: "/partnerships" },
+      { label: "회사 소개", href: "/about" },
+      { label: "채용", href: "/careers" },
+      { label: "보도자료", href: "/press" },
+      { label: "파트너십", href: "/partnerships" },
     ],
     support: [
-      { label: dict.footer.links.support, href: "/support" },
-      { label: dict.footer.links.docs, href: "/docs" },
-      { label: dict.footer.links.faq, href: "#faq" },
-      { label: dict.footer.links.community, href: "/community" },
+      { label: "개발자 지원", href: "/support" },
+      { label: "문서", href: "/docs" },
+      { label: "FAQ", href: "#faq" },
+      { label: "커뮤니티", href: "/community" },
     ],
     legal: [
-      { label: dict.footer.links.privacy, href: "/privacy" },
-      { label: dict.footer.links.terms, href: "/terms" },
-      { label: dict.footer.links.cookies, href: "/cookies" },
-      { label: dict.footer.links.license, href: "/license" },
+      { label: "개인정보처리방침", href: "/privacy" },
+      { label: "이용약관", href: "/terms" },
+      { label: "쿠키 정책", href: "/cookies" },
+      { label: "라이선스", href: "/license" },
     ],
   };
 
@@ -53,17 +45,17 @@ export const FooterSection = React.memo(function FooterSection({
     {
       icon: Twitter,
       href: "https://twitter.com/saasstarterkit",
-      label: dict.footer.socialLinks.twitter,
+      label: "Twitter",
     },
     {
       icon: Instagram,
       href: "https://instagram.com/saasstarterkit",
-      label: dict.footer.socialLinks.instagram,
+      label: "Instagram",
     },
     {
       icon: Youtube,
       href: "https://youtube.com/saasstarterkit",
-      label: dict.footer.socialLinks.youtube,
+      label: "YouTube",
     },
   ];
 
@@ -85,7 +77,7 @@ export const FooterSection = React.memo(function FooterSection({
                 <Sparkles className="w-6 h-6 text-primary-foreground" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
-                {dict.footer.brand}
+                SaaS Start Kit
               </span>
             </motion.div>
             <motion.p
@@ -95,14 +87,9 @@ export const FooterSection = React.memo(function FooterSection({
               viewport={{ once: true }}
               className="text-muted-foreground mb-6 leading-relaxed"
             >
-              {dict.footer.description
-                .split("\n")
-                .map((line: string, index: number) => (
-                  <React.Fragment key={index}>
-                    {line}
-                    {index === 0 && <br />}
-                  </React.Fragment>
-                ))}
+              빠르게 구축하는 SaaS의 미래.
+              <br />
+              당신의 아이디어를 현실로 만들고, 새로운 비즈니스를 시작하세요.
             </motion.p>
 
             {/* Contact Info */}
@@ -115,15 +102,15 @@ export const FooterSection = React.memo(function FooterSection({
             >
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4" />
-                <span>{dict.footer.email}</span>
+                <span>hello@saasstarterkit.dev</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4" />
-                <span>{dict.footer.phone}</span>
+                <span>1588-0000</span>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="w-4 h-4" />
-                <span>{dict.footer.address}</span>
+                <span>서울시 강남구 개발로 123</span>
               </div>
             </motion.div>
           </div>
@@ -139,10 +126,10 @@ export const FooterSection = React.memo(function FooterSection({
                 viewport={{ once: true }}
               >
                 <h3 className="font-semibold mb-4 capitalize">
-                  {category === "product" && dict.footer.categories.product}
-                  {category === "company" && dict.footer.categories.company}
-                  {category === "support" && dict.footer.categories.support}
-                  {category === "legal" && dict.footer.categories.legal}
+                  {category === "product" && "제품"}
+                  {category === "company" && "회사"}
+                  {category === "support" && "지원"}
+                  {category === "legal" && "법적 고지"}
                 </h3>
                 <ul className="space-y-3">
                   {links.map((link) => (
@@ -171,8 +158,7 @@ export const FooterSection = React.memo(function FooterSection({
         >
           <div className="flex items-center gap-6">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} {dict.footer.brand}.{" "}
-              {dict.footer.copyright}
+              © {new Date().getFullYear()} SaaS Start Kit. All rights reserved.
             </p>
           </div>
 

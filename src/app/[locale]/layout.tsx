@@ -31,7 +31,7 @@ export default async function RootLayout({
         <SocialProviders>
           <HeaderSection locale={validLocale} />
           {children}
-          <FooterSection locale={validLocale} />
+          <FooterSection />
         </SocialProviders>
       </body>
     </html>

@@ -6,22 +6,10 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Star } from "lucide-react";
 import { Marquee } from "@/components/magicui/marquee";
+import { TECH_STACK_ITEMS } from "@/lib/constants";
 
 export const FeaturesSection = React.memo(function FeaturesSection() {
-  const techStack = [
-    { name: "Next.js 15", icon: "⚡" },
-    { name: "TypeScript", icon: "🔷" },
-    { name: "Tailwind CSS", icon: "🎨" },
-    { name: "Prisma ORM", icon: "🗄️" },
-    { name: "NextAuth.js", icon: "🔐" },
-    { name: "Stripe", icon: "💳" },
-    { name: "Resend", icon: "📧" },
-    { name: "React Email", icon: "✉️" },
-    { name: "PostgreSQL", icon: "🐘" },
-    { name: "Vercel", icon: "▲" },
-    { name: "shadcn/ui", icon: "🎯" },
-    { name: "Framer Motion", icon: "🎬" },
-  ];
+  const techStack = TECH_STACK_ITEMS;
 
   return (
     <section

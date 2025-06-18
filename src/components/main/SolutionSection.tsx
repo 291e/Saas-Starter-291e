@@ -17,65 +17,10 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
+import { SOLUTIONS } from "@/lib/constants";
 
 export const SolutionSection = React.memo(function SolutionSection() {
-  const solutions = [
-    {
-      id: 1,
-      icon: Zap,
-      title: "즉시 시작 가능",
-      description:
-        "완전히 설정된 개발 환경으로 5분 안에 SaaS 개발을 시작하세요.",
-      size: "large", // 2x2
-      gradient: "from-blue-500 to-cyan-500",
-      features: ["Next.js 15", "TypeScript", "ESLint 설정", "Prettier 설정"],
-    },
-    {
-      id: 2,
-      icon: Shield,
-      title: "보안 내장",
-      description: "업계 표준 보안이 미리 구현되어 있습니다.",
-      size: "medium", // 1x2
-      gradient: "from-green-500 to-emerald-500",
-      features: ["JWT 인증", "CSRF 보호", "Rate Limiting"],
-    },
-    {
-      id: 3,
-      icon: Database,
-      title: "데이터베이스 준비",
-      description: "Prisma ORM으로 완벽하게 설정된 데이터베이스",
-      size: "medium", // 1x2
-      gradient: "from-purple-500 to-pink-500",
-      features: ["PostgreSQL", "Migration", "Seeding"],
-    },
-    {
-      id: 4,
-      icon: CreditCard,
-      title: "결제 통합",
-      description: "Stripe 결제 시스템이 바로 사용 가능합니다.",
-      size: "small", // 1x1
-      gradient: "from-orange-500 to-red-500",
-      features: ["구독 결제", "일회성 결제"],
-    },
-    {
-      id: 5,
-      icon: Mail,
-      title: "이메일 자동화",
-      description: "React Email과 Resend로 구성된 시스템",
-      size: "small", // 1x1
-      gradient: "from-indigo-500 to-blue-500",
-      features: ["템플릿", "자동 발송"],
-    },
-    {
-      id: 6,
-      icon: Users,
-      title: "사용자 관리",
-      description: "완전한 사용자 관리 시스템",
-      size: "medium", // 2x1
-      gradient: "from-pink-500 to-rose-500",
-      features: ["회원가입", "로그인", "프로필 관리", "권한 관리"],
-    },
-  ];
+  const solutions = SOLUTIONS;
 
   const getSizeClasses = (size: string) => {
     switch (size) {
@@ -87,6 +32,25 @@ export const SolutionSection = React.memo(function SolutionSection() {
         return "md:col-span-2 md:row-span-1";
       default:
         return "md:col-span-1 md:row-span-1";
+    }
+  };
+
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case "Zap":
+        return <Zap className="w-6 h-6 text-white" />;
+      case "Shield":
+        return <Shield className="w-6 h-6 text-white" />;
+      case "Database":
+        return <Database className="w-6 h-6 text-white" />;
+      case "CreditCard":
+        return <CreditCard className="w-6 h-6 text-white" />;
+      case "Mail":
+        return <Mail className="w-6 h-6 text-white" />;
+      case "Users":
+        return <Users className="w-6 h-6 text-white" />;
+      default:
+        return <Zap className="w-6 h-6 text-white" />;
     }
   };
 
@@ -144,23 +108,31 @@ export const SolutionSection = React.memo(function SolutionSection() {
                 />
 
                 <CardContent
-                  className={`p-6 relative h-full flex flex-col ${solution.size === "large" ? "justify-center" : "justify-start"}`}
+                  className={`p-6 relative h-full flex flex-col ${
+                    solution.size === "large"
+                      ? "justify-center"
+                      : "justify-start"
+                  }`}
                 >
                   <div className="flex-grow">
                     <div
                       className={`w-12 h-12 rounded-xl bg-gradient-to-br ${solution.gradient} p-3 mb-4 group-hover:scale-110 transition-transform duration-300`}
                     >
-                      <solution.icon className="w-6 h-6 text-white" />
+                      {getIcon(solution.icon)}
                     </div>
 
                     <h3
-                      className={`font-bold mb-3 group-hover:text-primary transition-colors duration-300 ${solution.size === "large" ? "text-2xl" : "text-lg"}`}
+                      className={`font-bold mb-3 group-hover:text-primary transition-colors duration-300 ${
+                        solution.size === "large" ? "text-2xl" : "text-lg"
+                      }`}
                     >
                       {solution.title}
                     </h3>
 
                     <p
-                      className={`text-muted-foreground leading-relaxed mb-4 ${solution.size === "large" ? "text-lg" : "text-sm"}`}
+                      className={`text-muted-foreground leading-relaxed mb-4 ${
+                        solution.size === "large" ? "text-lg" : "text-sm"
+                      }`}
                     >
                       {solution.description}
                     </p>
